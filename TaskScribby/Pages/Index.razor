@@ -1,0 +1,86 @@
+﻿@page "/"
+
+@using TaskScribby.Areas.Identity.Data;
+@using Microsoft.AspNetCore.Identity
+@using TaskScribby.Areas.Identity.Services;
+
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject ProjectService ProjectService
+
+@attribute [AllowAnonymous]
+
+<PageTitle>Index</PageTitle>
+
+@if (authenticated)
+{
+    <h1>Hello, world!</h1>
+
+   
+
+    @if(user != null)
+    {
+        <p>Welcome to your new app. @user.Projects.Count</p>
+        @foreach (var project in user.Projects)
+        {
+            <div style="display: flex">
+                <p>@project.ProjectName</p>
+                <button @onclick="() => DeleteProject(project)"> X </button>
+            </div>
+        }
+    }
+    
+    <form>
+        <input type="text" @bind-value="ProjectName" />
+    </form>
+    <button @onclick="AddNewProject">Create a new project</button>
+}
+else
+{
+    <RedirectToLogin />
+}
+
+@code {
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    bool authenticated = false;
+    ApplicationUser user;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var currentUser = (await authenticationStateTask).User;
+
+        if (currentUser.Identity.IsAuthenticated)
+        {
+            authenticated = true;
+            user = await UserManager.GetUserAsync(currentUser);
+            user.Projects = ProjectService.GetProjectsByUserID(user.Id);
+
+        }
+
+    }
+
+    string ProjectName { get; set; } = "";
+
+    public void AddNewProject()
+    {
+
+        if (user != null)
+        {
+            var newProject = new Project(ProjectName,"Description",0);
+            ProjectService.AddProject(newProject, user);
+
+        }
+    }
+
+    public void DeleteProject(Project project)
+    {
+        if (user != null)
+        {
+            user.Projects.Remove(project);
+            ProjectService.DeleteProject(project);
+        }
+    }
+
+}
