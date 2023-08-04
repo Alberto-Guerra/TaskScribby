@@ -1,11 +1,12 @@
 .page {
-    position: relative;
     display: flex;
     flex-direction: column;
 }
 
 main {
     flex: 1;
+    min-height: 100vh;
+    width: 100%;
 }
 
 .sidebar {
@@ -31,7 +32,7 @@ main {
         text-overflow: ellipsis;
     }
 
-@media (max-width: 640.98px) {
+@media (max-width: 768px) {
     .top-row:not(.auth) {
         display: none;
     }
@@ -45,7 +46,7 @@ main {
     }
 }
 
-@media (min-width: 641px) {
+@media (min-width: 769px) {
     .page {
         flex-direction: row;
     }

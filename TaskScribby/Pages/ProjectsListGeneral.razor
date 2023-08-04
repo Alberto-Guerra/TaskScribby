@@ -1,0 +1,157 @@
+﻿@using TaskScribby.Areas.Identity.Data;
+@using Microsoft.AspNetCore.Identity
+@using TaskScribby.Areas.Identity.Services;
+
+
+@inject ProjectService ProjectService
+
+@attribute [AllowAnonymous]
+
+<PageTitle>Index</PageTitle>
+
+@if (User != null)
+{
+
+    if (IsSmall)
+    {
+        handler = new MobileProjectHandler();
+    }
+    else
+    {
+        handler = new DesktopProjectHandler();
+    }
+
+    <div class="general-container">
+        @if (listProjectsVisible)
+        {
+            <div class="project-list-container">
+                @foreach (var project in User.Projects)
+                {
+                    <div class="project-container" @onclick="() => handler.handleClick(project,this)">
+                        <h4>@project.ProjectName - @project.ProjectPercentage%</h4>
+
+                        @{
+                            var description = @project.ProjectDescription;
+                        }
+
+                        @if (!string.IsNullOrEmpty(description) && description.Length > 100)
+                        {
+                            <p>description.Substring(0, 100)</p>
+                        }
+                        else if (!string.IsNullOrEmpty(description))
+                        {
+                            <p>@description</p>
+                        }
+
+                    </div>
+                }
+            </div>
+        }
+
+        @if (selectedProjectVisible)
+        {
+            if (IsSmall)
+            {
+                //Back button All projects and search bar
+            }
+            if (selectedProject != null)
+            {
+                <div class="concrete-project-container" >
+                    
+                        <h3><span @onclick="() => handler.handleBack(this)" class="oi oi-x" aria-hidden="true"></span> @selectedProject.ProjectName - @selectedProject.ProjectPercentage % <span @onclick="() => DeleteProject(selectedProject)" class="oi oi-trash" aria-hidden="true"></span></h3>
+                                         
+                    <p>@selectedProject.ProjectDescription</p>
+                </div>
+            }
+
+        }
+      
+    </div>
+
+}
+
+<MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="IsSmall" />
+
+@code {
+
+    bool authenticated = false;
+
+    [Parameter]
+    public ApplicationUser User { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        User.Projects = ProjectService.GetProjectsByUserID(User.Id);
+
+    }
+
+    bool IsSmall;
+
+    string ProjectName { get; set; } = "";
+
+    public void AddNewProject()
+    {
+
+        if (User != null)
+        {
+            var newProject = new Project(ProjectName, "Description", 0);
+            ProjectService.AddProject(newProject, User);
+
+        }
+    }
+
+    public void DeleteProject(Project project)
+    {
+        if (User != null)
+        {
+            User.Projects.Remove(project);
+            ProjectService.DeleteProject(project);
+            handler.handleBack(this);
+        }
+    }
+
+    bool listProjectsVisible = true;
+    bool selectedProjectVisible = false;
+    Project? selectedProject;
+    Handler handler;
+
+    public interface Handler
+    {
+        public void handleClick(Project p, ProjectsListGeneral plg);
+        public void handleBack(ProjectsListGeneral plg);
+    }
+
+    public class MobileProjectHandler : Handler
+    {
+        public void handleClick(Project p, ProjectsListGeneral plg)
+        {
+            plg.selectedProject = p;
+            plg.selectedProjectVisible = true;
+            plg.listProjectsVisible = false;
+        }
+
+        public void handleBack(ProjectsListGeneral plg)
+        {
+            plg.selectedProject = null;
+            plg.selectedProjectVisible = false;
+            plg.listProjectsVisible = true;
+        }
+
+    }
+
+    public class DesktopProjectHandler : Handler
+    {
+        public void handleClick(Project p, ProjectsListGeneral plg)
+        {
+            plg.selectedProject = p;
+            plg.selectedProjectVisible = true;
+        }
+
+        public void handleBack(ProjectsListGeneral plg)
+        {
+            plg.selectedProject = null;
+            plg.selectedProjectVisible = false;
+        }
+    }
+
+}

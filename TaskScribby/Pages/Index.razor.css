@@ -1,0 +1,116 @@
+﻿* {
+    color: #1E1E1E;
+    background-color: #F9F8EB;
+}
+
+
+a {
+    text-decoration: none;
+    color: #1E1E1E;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #E83671;
+}
+
+.page {
+    display: flex;
+    justify-content: center; 
+    height: 100%;
+    min-height: 100vh
+}
+
+.wrapper {
+    max-width: 1200px;
+
+    width: 100%;
+    height: 100%
+}
+
+span {
+    cursor: pointer;
+}
+    
+
+.content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+    .content .links {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 20px;
+        width: 15%;
+        height: 100%;
+    }
+
+    .content .projects-list {
+        width: 100%;
+        height: 100%;
+    }
+
+.button-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+}
+
+    .button-div > button {
+        background-color: #E83671;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 50px;
+        font-size: 15px;
+    }
+
+    .new-proyect-pc {
+        font-size: 14px;
+        width: 100%;
+        height: 40px;
+        font-weight: 600;
+    }
+    .new-proyect-mobile {
+        font-size: 20px;
+        width: 150px;
+        height: 40px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .button-div > button:hover {
+        box-shadow: 2px 2px 10px #E83671;
+    }
+
+
+
+/* Media query for small screens */
+
+@media only screen and (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+        .content .links {
+            flex-direction: row;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+}
+
+/* Media query for large screens */
+
+@media only screen and (min-width: 769px) {
+
+    .content .links {
+        justify-content: flex-start;
+    }
+
+    
+}

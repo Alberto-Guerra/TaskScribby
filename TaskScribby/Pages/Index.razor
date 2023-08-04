@@ -1,51 +1,114 @@
 ﻿@page "/"
 
+
 @using TaskScribby.Areas.Identity.Data;
 @using Microsoft.AspNetCore.Identity
 @using TaskScribby.Areas.Identity.Services;
 
 @inject UserManager<ApplicationUser> UserManager
 @inject SignInManager<ApplicationUser> SignInManager
+@inject NavigationManager NavigationManager
 @inject ProjectService ProjectService
+@inject IJSRuntime jsRuntime
 
-@attribute [AllowAnonymous]
+
 
 <PageTitle>Index</PageTitle>
 
+
+
 @if (authenticated)
 {
-    <h1>Hello, world!</h1>
-
-   
-
-    @if(user != null)
+    @if (user != null)
     {
-        <p>Welcome to your new app. @user.Projects.Count</p>
-        @foreach (var project in user.Projects)
-        {
-            <div style="display: flex">
-                <p>@project.ProjectName</p>
-                <button @onclick="() => DeleteProject(project)"> X </button>
+        <div class="page">
+        <div class="wrapper">
+            <header>
+                <h1>Hello @user.Email !!</h1>
+            </header>
+
+            <div class="content">
+                <div class="links">
+                    <a href="/" style="color: #E83671">Projects</a>
+                    <a href="#">Tasks</a>
+                    <a href="#">Notes</a>
+                        @if (!IsSmall && isProjectListVisible)
+                    {
+                        <div class="button-div">
+
+                                <button class="new-proyect-pc" @onclick="() =>showNewProject()">New Project</button>
+
+                        </div>
+                    }
+                </div>
+
+                @if (isProjectListVisible)
+                {
+                    <div class="projects-list">
+                        <ProjectsListGeneral User=@user>
+                        </ProjectsListGeneral>
+                    </div>
+
+                        @if (IsSmall)
+                        {
+                            <div class="button-div">
+
+                                <button class="new-proyect-mobile" @onclick="() =>showNewProject()">New Project</button>
+
+                            </div>
+                        }
+                }
+
+                @if (isNewProjectVisible)
+                {
+                        <form>
+                            <span class="oi oi-x" @onclick="() =>showProjectList()">  </span>
+                            <label for="project-name">Name of the Project:</label><br>
+                            <input type="text" id="project-name" @bind-value="@ProjectName"><br>
+                            <label for="project-desc">Description:</label><br>
+                            <textarea id="project-desc" @oninput="@HandleDescriptionOnChange"> @ProjectDescription </textarea><br>
+                            <label for="project-perc">Percentage:</label>
+                            <input type="number" id="project-perc" name="project-perc" min="0" max="100" required @bind-value="@ProjectPercentage"><br>
+                            <input type="submit" value="Create" @onclick="() =>createProject()">
+                        </form>
+
+                }
+
+              
+
+               
             </div>
-        }
+
+        </div>
+        </div>
     }
     
-    <form>
-        <input type="text" @bind-value="ProjectName" />
-    </form>
-    <button @onclick="AddNewProject">Create a new project</button>
 }
 else
 {
-    <RedirectToLogin />
+    //open login page
+    NavigationManager.NavigateTo("/Identity/Account/Login");
+
 }
 
-@code {
+
+
+<MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="IsSmall" />
+
+@code{
     [CascadingParameter]
     private Task<AuthenticationState> authenticationStateTask { get; set; }
 
     bool authenticated = false;
+
+
     ApplicationUser user;
+
+    bool IsSmall = false;
+
+    bool isProjectListVisible = true;
+    bool isNewProjectVisible = false;
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -55,32 +118,74 @@ else
         {
             authenticated = true;
             user = await UserManager.GetUserAsync(currentUser);
-            user.Projects = ProjectService.GetProjectsByUserID(user.Id);
+
 
         }
 
+    }
+
+    void showNewProject()
+    {
+        isProjectListVisible = false;
+        isNewProjectVisible = true;
+    }
+
+    void showProjectList()
+    {
+        isProjectListVisible = true;
+        isNewProjectVisible = false;
     }
 
     string ProjectName { get; set; } = "";
+    string ProjectDescription { get; set; } = "";
+    double ProjectPercentage { get; set; }
 
-    public void AddNewProject()
+    private void HandleDescriptionOnChange(ChangeEventArgs e)
     {
-
-        if (user != null)
+        if (e.Value == null)
         {
-            var newProject = new Project(ProjectName,"Description",0);
-            ProjectService.AddProject(newProject, user);
-
+            return;
         }
+        ProjectDescription = e.Value.ToString();
+
+
     }
 
-    public void DeleteProject(Project project)
+    void createProject()
     {
-        if (user != null)
+        if(ProjectName == "")
         {
-            user.Projects.Remove(project);
-            ProjectService.DeleteProject(project);
+            jsRuntime.InvokeVoidAsync("alert", "You Cannot Create a Project Without a Name!!");
+            return;
         }
+
+        if (ProjectDescription == "")
+        {
+            jsRuntime.InvokeVoidAsync("alert", "You Cannot Create a Project Without a Description!!");
+            return;
+        }
+
+        if (ProjectPercentage < 0 || ProjectPercentage > 100)
+        {
+            jsRuntime.InvokeVoidAsync("alert", "Percentage should be between 0 and 100!!");
+            return;
+        }
+
+        var p = new Project(ProjectName, ProjectDescription, ProjectPercentage);
+        ProjectService.AddProject(p, user);
+
+        clearForm();
+
+        showProjectList();
     }
+
+    void clearForm()
+    {
+        ProjectName = "";
+        ProjectDescription = "";
+        ProjectPercentage = 0;
+    }
+
 
 }
+
