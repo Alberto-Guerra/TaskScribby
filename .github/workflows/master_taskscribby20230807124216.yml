@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'TaskScribby20230807124216'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B42B993715634A0C904B0928CFF5999B }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_91D8A49795AE40E2A8D379A8D01388AE }}
           package: .
