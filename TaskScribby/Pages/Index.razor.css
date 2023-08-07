@@ -1,7 +1,61 @@
-﻿* {
+﻿@font-face {
+    font-family: 'Inter';
+    src: url('/css/fonts/Inter/Inter-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/css/fonts/Inter/Inter-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/css/fonts/Inter/Inter-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/css/fonts/Inter/Inter-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+* {
     color: #1E1E1E;
     background-color: #F9F8EB;
+    font-family: Inter;
 }
+
+header {
+    display: flex;
+    justify-content: space-between;  
+    font-size: 15px;
+    font-weight: 700;
+    padding-top: 10px;
+}
+
+    header > p {
+        font-size: 15px;
+        font-weight: 700;
+    }
+    
+
+.button-logout {
+    text-decoration: none;
+    color: #1E1E1E;
+    font-weight: bold;
+    border: none;
+}
+.button-logout:hover {
+color: #E83671;
+}
+
 
 
 a {
@@ -87,6 +141,39 @@ span {
         box-shadow: 2px 2px 10px #E83671;
     }
 
+/* Form */
+.form-style {
+    max-width: 360px;
+}
+
+.form-group {
+    margin: 10px 0;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn {
+    background-color: #E83671;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 50px;
+    font-size: 15px;
+}
+
+    .btn:hover {
+        box-shadow: 2px 2px 10px #E83671;
+    }
+
+.oi-x {
+    cursor: pointer;
+}
+
+
 
 
 /* Media query for small screens */
@@ -102,6 +189,14 @@ span {
             justify-content: space-evenly;
             width: 100%;
         }
+    header {
+        justify-content: space-around;
+    }
+
+    .form-style{
+        margin-top: 20px;
+    }
+
 }
 
 /* Media query for large screens */
@@ -113,4 +208,12 @@ span {
     }
 
     
+}
+
+@media only screen and (max-width: 1300px) {
+
+    
+    .wrapper {
+        padding: 0px 20px;
+    }
 }

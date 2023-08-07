@@ -1,0 +1,147 @@
+﻿@font-face {
+    font-family: 'Inter';
+    src: url('/css/fonts/Inter/Inter-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/css/fonts/Inter/Inter-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/css/fonts/Inter/Inter-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/css/fonts/Inter/Inter-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+body {
+    background-color: #F9F8EB;
+    font-family: Inter;
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    text-align: center;
+    color: #1F1E1C;
+}
+
+.wrapper {
+    background-color: #F9F8EB;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 400px;
+    max-width: 500px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+    color: #1F1E1C;
+    width: 60%;
+   
+}
+
+.general-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+.content-div {
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+
+}
+
+input[type="email"],
+input[type="password"] {
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #565550;
+    width: 100%;
+    color: #8C8B84;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+}
+
+.form-floating {
+    margin-bottom: 10px;
+}
+
+label {
+    color: #1F1E1C;
+    display: block;
+    margin-bottom: 5px;
+    text-align: right;
+}
+
+.main-button {
+    color: #FADEE8;
+    background-color: #E83671;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    width: 150px;
+    height: 40px;
+    margin-top : 20px;
+}
+
+p {
+    font-size: 14px;
+    color: #1F1E1C;
+    
+}
+
+a {
+    color: #1F1E1C;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+    a:hover {
+        color: #E83671
+    }
+
+
+@media only screen and (max-width: 768px) {
+    .wrapper {
+        box-shadow: none;
+        padding: 20px;
+        min-width: none;
+    }
+
+    h1 {
+        margin-bottom: 0;
+        font-size: 2rem;
+    }
+
+    h2 {
+        width: 100%;
+    }
+
+    .content-div {
+        gap: 2px;
+    }
+}

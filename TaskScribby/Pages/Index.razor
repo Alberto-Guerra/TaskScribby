@@ -24,8 +24,15 @@
         <div class="page">
         <div class="wrapper">
             <header>
-                <h1>Hello @user.Email !!</h1>
+                <p>@user.Email</p>
+                <form method="post" action="Identity/Account/LogOut">
+                        <button type="submit" class="button-logout">Log out</button>
+                </form>
+
+                   
+                    
             </header>
+               
 
             <div class="content">
                 <div class="links">
@@ -37,6 +44,7 @@
                         <div class="button-div">
 
                                 <button class="new-proyect-pc" @onclick="() =>showNewProject()">New Project</button>
+                                
 
                         </div>
                     }
@@ -61,15 +69,24 @@
 
                 @if (isNewProjectVisible)
                 {
-                        <form>
-                            <span class="oi oi-x" @onclick="() =>showProjectList()">  </span>
-                            <label for="project-name">Name of the Project:</label><br>
-                            <input type="text" id="project-name" @bind-value="@ProjectName"><br>
-                            <label for="project-desc">Description:</label><br>
-                            <textarea id="project-desc" @oninput="@HandleDescriptionOnChange"> @ProjectDescription </textarea><br>
-                            <label for="project-perc">Percentage:</label>
-                            <input type="number" id="project-perc" name="project-perc" min="0" max="100" required @bind-value="@ProjectPercentage"><br>
-                            <input type="submit" value="Create" @onclick="() =>createProject()">
+                        
+                        <form class="form-style">
+                            <div class="form-group">
+                                <label for="project-name">Name of the Project:</label><br>
+                                <input type="text" class="form-control" id="project-name" @bind-value="@ProjectName"><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="project-desc">Description:</label><br>
+                                <textarea class="form-control" id="project-desc" @oninput="@HandleDescriptionOnChange"> @ProjectDescription </textarea><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="project-perc">Percentage:</label>
+                                <input type="number" class="form-control" id="project-perc" name="project-perc" min="0" max="100" required @bind-value="@ProjectPercentage"><br>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn new-proyect-pc" value="Create" @onclick="() =>createProject()">
+                                <span class="oi oi-x" @onclick="() =>showProjectList()">  </span>
+                            </div>
                         </form>
 
                 }
@@ -184,6 +201,12 @@ else
         ProjectName = "";
         ProjectDescription = "";
         ProjectPercentage = 0;
+    }
+
+    void logOut()
+    {
+
+        //AuthenticationManager.SignOut();
     }
 
 

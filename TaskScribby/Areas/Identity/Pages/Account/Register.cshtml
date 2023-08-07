@@ -6,24 +6,42 @@
     Layout = null;
 }
 
-<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; max-width: 500px; width: 100%; margin: auto">
-    <h1>@ViewData["Title"]</h1>
-    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" required>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required>
-        <div id="submit-container" style="display:table;">
-            <button id="registerSubmit" type="submit">Register</button>
-        </div>
+<head>
+    <link rel="stylesheet" href="/css/LoginRegister.css" />
+</head>
 
-    </form>
-    <div style="text-align:center">
-        <p>
-            Already a member? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Log IN!</a>
-        </p>
+<div class="general-div">
+    <div class="wrapper">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div class="content-div">
+                <h1>@ViewData["Title"]</h1>
+                <h2>Register now!</h2>
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-floating ">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Email" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="off" aria-required="true" placeholder="Confirm password" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div>
+                    <button id="register-submit" type="submit" class="main-button">Register</button>
+                </div>
+
+                <div style="text-align:center">
+                    <p>
+                        Already a member? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Log in</a>
+                    </p>
+                </div>
+            </div>
+        </form>
+
     </div>
 </div>
 

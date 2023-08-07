@@ -2,7 +2,23 @@
 @model ConfirmEmailModel
 @{
     ViewData["Title"] = "Confirm email";
+    Layout = null;
 }
 
-<h1>@ViewData["Title"]</h1>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+
+<head>
+    <link rel="stylesheet" href="/css/LoginRegister.css" />
+</head>
+
+<div class="general-div">
+    <div class="wrapper">
+        <div class="content-div">
+            <h1>@ViewData["Title"]</h1>
+            @{
+                <p> @Model.StatusMessage </p>
+                <a href="/"> Back to home </a>
+             }
+        </div>
+    </div>
+</div>
