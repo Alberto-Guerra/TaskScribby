@@ -10,9 +10,9 @@ TaskScriby is a web application developed in Blazor that offers powerful project
 
 - **Project Management:** Users can create projects and organize tasks under each project. Project details can be easily edited, and progress can be tracked.
 
-- **Task Tracking:** TaskScriby allows users to add, update, and mark tasks as complete. It provides a clear view of ongoing and completed tasks within each project.
+- **Task Tracking:** TaskScriby allows users to add, update, and mark tasks as complete. It provides a clear view of ongoing and completed tasks within each project. _(Future Update)_
 
-- **Note-taking:** Users can create notes for different purposes and categories. Notes are editable, and users can easily search for specific notes based on keywords or tags.
+- **Note-taking:** Users can create notes for different purposes and categories. Notes are editable, and users can easily search for specific notes based on keywords or tags. _(Future Update)_
 
 🇪🇸
 ## Descripción
@@ -25,8 +25,8 @@ TaskScriby es una aplicación web desarrollada en Blazor que ofrece potentes fun
 
 - **Gestión de Proyectos:** Los usuarios pueden crear proyectos y organizar tareas bajo cada proyecto. Los detalles del proyecto pueden editarse fácilmente y se puede realizar un seguimiento del progreso.
 
-- **Seguimiento de Tareas:** TaskScriby permite a los usuarios agregar, actualizar y marcar tareas como completadas. Proporciona una visión clara de las tareas en curso y completadas dentro de cada proyecto.
+- **Seguimiento de Tareas:** TaskScriby permite a los usuarios agregar, actualizar y marcar tareas como completadas. Proporciona una visión clara de las tareas en curso y completadas dentro de cada proyecto. _(Actualización Futura)_
 
-- **Toma de Notas:** Los usuarios pueden crear notas para diferentes propósitos y categorías. Las notas son editables, y los usuarios pueden buscar fácilmente notas específicas según palabras clave o etiquetas.
+- **Toma de Notas:** Los usuarios pueden crear notas para diferentes propósitos y categorías. Las notas son editables, y los usuarios pueden buscar fácilmente notas específicas según palabras clave o etiquetas. _(Actualización Futura)_
 
 #
