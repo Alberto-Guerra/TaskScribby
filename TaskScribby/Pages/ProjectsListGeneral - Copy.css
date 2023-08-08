@@ -21,15 +21,18 @@
 .project-container {
     display: flex;
     cursor: pointer;
-    flex-direction: column;   
+    flex-direction: column;
+    align-items: center;
     width: 70%;
     border-radius: 8px;
-    padding: 18px 25px;
+    padding: 10px;
+    background-color: #ECEBDE;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-.project-container > p {
-    font-weight: 300;
-}
+    .project-container:hover {
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    }
 
    
 
@@ -38,9 +41,6 @@ span {
 }
 
 h3 {
-    font-size: 20px;
-}
-h4 {
     font-size: 20px;
 }
 
@@ -57,6 +57,8 @@ h4,h3 {
     justify-content: space-between;
     border-radius: 8px;
     padding: 10px;
+    background-color: #ECEBDE;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     border: solid 1px #999689;
 }
 
@@ -72,18 +74,14 @@ h4,h3 {
     margin-top: 10px;
     width: 100%;
     font-size: 25px;
-    
+    text-align: center;
 }
-    .project-title > h3 {
-        display: flex;
-        justify-content: space-between;
-    }
 
-    .project-description {
-        margin-top: 20px;
-        width: 100%;
-        font-size: 18px;
-    }
+.project-description {
+    margin-top: 20px;
+    width: 100%;
+    font-size: 18px;
+}
 
 .project-editmode-button {
     display: flex;
@@ -94,6 +92,8 @@ h4,h3 {
 }
 
     .project-editmode-button > button {
+    background-color: #E83671;
+        color: #FFFFFF;
         border: none;
         border-radius: 50px;
         font-size: 15px;
@@ -104,6 +104,7 @@ h4,h3 {
 .perc-input {
     max-width: 70px;
     text-align: center;
+    background-color: #ECEBDE;
     border: none ;
     font-size: 25px;
     font-weight: 600;
@@ -127,15 +128,20 @@ h4,h3 {
     max-width: 660px;
     width: 100%;
     padding: 0 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
     gap: 20px;
 }
 
 
 input, textarea {
+    background-color: #F9F8EB;
     resize: none;
 }
 
+    input:focus, textarea:focus {
+        background-color: #F9F8EB;
+    }
 
 .form-group {
     margin: 10px 0;
@@ -159,6 +165,8 @@ input, textarea {
 }
 
 .btn {
+    background-color: #E83671;
+    color: #FFFFFF;
     border: none;
     border-radius: 50px;
     font-size: 15px;
@@ -168,18 +176,9 @@ input, textarea {
     margin-bottom: 20px;
 }
 
-.btn-create {
-    border-radius: 50px;
-    font-size: 15px;
-    max-width: 40%;
-    border: none;
-    width: 100px;
-    height: 37px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    background-color: #E83671;
-}
-
+    .btn:hover {
+        box-shadow: 2px 2px 10px #E83671;
+    }
 
 .oi-x {
     cursor: pointer;
@@ -187,13 +186,12 @@ input, textarea {
 
 .back-button {
     font-weight: 600;
+    color: #E83671;
     font-size: 20px;
 }
-
-input, textarea, input:focus, textarea:focus {
-    background-color: transparent;
-}
-
+    .back-button:hover {
+        color: #BA2959;
+    }
 
 
 
@@ -212,10 +210,7 @@ input, textarea, input:focus, textarea:focus {
         width: 80%;
     }
     .concrete-project-container {
-        width: 100%;
-        margin: 0 10%;
-        
-        
+        width: 95%;
     }
 
     .form-style {

@@ -1,0 +1,35 @@
+﻿
+
+
+.font-normal {
+    color: #F9F8EB;
+}
+
+    .font-normal:focus {
+        color: #F9F8EB;
+    }
+
+.main-background {
+    background-color: #1E1E1E;
+}
+
+.secondary-background {
+    background-color: #33322F;
+}
+
+input, textarea {
+    color: #FFFFFF;
+}
+
+
+.shadow-always {
+    box-shadow: 0px 4px 8px #f9f8eb84;
+}
+
+.shadow-hover:hover {
+    box-shadow: 0px 4px 8px #F9F8EB;
+}
+
+.bottom-border {
+border-bottom: 1px solid #F9F8EB;
+}

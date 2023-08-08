@@ -9,6 +9,8 @@
 
 <PageTitle>Index</PageTitle>
 
+
+
 @if (User != null)
 {
 
@@ -21,13 +23,14 @@
         handler = new DesktopProjectHandler();
     }
 
-    <div class="general-container">
+    <div class="general-container main-background">
         @if (listProjectsVisible && !editMode)
-        {
+        {                          
+                    
             <div class="project-list-container">
                 @foreach (var project in User.Projects)
                 {
-                    <div class="project-container" @onclick="() => handler.handleClick(project,this)">
+                    <div class="project-container secondary-background shadow-always shadow-hover" @onclick="() => handler.handleClick(project,this)">
                         <h4>@project.ProjectName - @project.ProjectPercentage%</h4>
 
                         @{
@@ -53,13 +56,15 @@
            
             if (selectedProject != null)
             {
-                <div class="concrete-project-container">
+                <div class="concrete-project-container secondary-background shadow-always">
+                 
                 <div class="project-content">
-                <div class="project-title"> 
+                <div class="project-title">
+                            <span @onclick="() => handler.handleBack(this)" style="font-size: 15px;" class="oi oi-x hoverable" aria-hidden="true"></span>
                 <h3>
-                    <span @onclick="() => handler.handleBack(this)" class="oi oi-x" aria-hidden="true"></span>
+                    
                         @selectedProject.ProjectName - @selectedProject.ProjectPercentage% 
-                    <span @onclick="() => DeleteProject(selectedProject)" class="oi oi-trash" aria-hidden="true"></span>
+                                <span @onclick="() => DeleteProject(selectedProject)" class="oi oi-trash hoverable" aria-hidden="true"></span>
                 </h3>
                     </div>
                 <div class="project-description">
@@ -68,7 +73,7 @@
                  </div>
                  </div>
                     <div class="project-editmode-button">
-                        <button @onclick="() => ToggleEditMode()"> <span class="oi oi-brush" aria-hidden="true"></span>  Edit Mode </button>
+                        <button class="highlight" @onclick="() => ToggleEditMode()"> <span class="oi oi-brush" aria-hidden="true"></span>  Edit Mode </button>
                  </div>
             </div>
             }
@@ -77,25 +82,25 @@
 
         @if (editMode && selectedProject != null)
         {
-            <div class="form-div">
-                <form class="form-style">
+            <div class="form-div ">
+                <form class="form-style shadow-always">
                     <div class="form-group-div">
                         <div class="form-group">
                             <span class="back-button" @onclick="() =>ToggleEditMode()"> &lt- </span> <br>
                             <label for="project-name"> Name of the Project:</label><br>
-                            <input type="text" class="form-control" id="project-name" @bind-value="@selectedProject.ProjectName"><br>
+                            <input type="text" class="form-control font-normal" id="project-name" @bind-value="@selectedProject.ProjectName"><br>
                         </div>
                         <div class="form-group">
                             <label for="project-desc">Description:</label><br>
-                            <textarea class="form-control desc" id="project-desc" @oninput="@HandleDescriptionOnChange"> @selectedProject.ProjectDescription </textarea><br>
+                            <textarea class="form-control desc font-normal" id="project-desc" @oninput="@HandleDescriptionOnChange"> @selectedProject.ProjectDescription </textarea><br>
                         </div>
                         <div class="form-group">
                             <label for="project-perc">Percentage:</label>
-                            <input type="number" class="form-control" id="project-perc" name="project-perc" min="0" max="100" required @bind-value="@selectedProject.ProjectPercentage"><br>
+                            <input type="number" class="form-control font-normal" id="project-perc" name="project-perc" min="0" max="100" required @bind-value="@selectedProject.ProjectPercentage"><br>
                         </div>
                     </div>
                     <div class="form-group-button">
-                        <input type="submit" class="btn new-proyect-pc" value="Update" @onclick="() => UpdateProject()">
+                        <input type="submit" class="highlight btn-create" value="Update" @onclick="() => UpdateProject()">
 
                     </div>
                 </form>
@@ -114,6 +119,9 @@
 
     [Parameter]
     public ApplicationUser User { get; set; }
+
+    [Parameter]
+    public bool darkMode { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

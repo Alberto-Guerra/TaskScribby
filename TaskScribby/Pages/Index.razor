@@ -10,47 +10,69 @@
 @inject NavigationManager NavigationManager
 @inject ProjectService ProjectService
 @inject IJSRuntime jsRuntime
+@inject DarkMode DarkMode
 
 
 
 <PageTitle>Index</PageTitle>
 
-
+<head>
+    <link href="/css/colors.css" rel="stylesheet" />
+    @if (DarkMode.isDarkMode)
+    {
+        <link href="/css/colorsDark.css" rel="stylesheet" />
+    }
+    else
+    {
+        <link href="/css/colorsLight.css" rel="stylesheet" />
+    }
+</head>
 
 @if (authenticated)
 {
     @if (user != null)
     {
-        <div class="page">
+        <div class="page font-normal main-background">
         <div class="wrapper">
-            <header>
+            <header class="bottom-border">
                 <p>@user.Email</p>
                 <form method="post" action="Identity/Account/LogOut">
-                        <button type="submit" class="button-logout">Log out</button>
+                        <button type="submit" class="button-logout "> <a class="hoverable font-normal"> Log out </a></button>
                 </form>   
             </header>
                
 
             <div class="content">
                 <div class="links">
-                    <a href="/" style="color: #E83671">Projects</a>
-                    <a href="#">Tasks</a>
-                    <a href="#">Notes</a>
+                        @if (DarkMode.isDarkMode)
+                        {
+                            <span class="hoverable font-normal oi oi-moon" @onclick="() => ToggleDarkMode() "></span>
+                        }
+                        else
+                        {
+                            <span class="hoverable font-normal oi oi-sun" @onclick="() => ToggleDarkMode() "></span>
+                        }
+                        
+                    <a class="hoverable font-normal" href="/" style="color: #E83671">Projects</a>
+                    <a class="hoverable font-normal" href="#">Tasks</a>
+                    <a class="hoverable font-normal" href="#">Notes</a>
                         @if (!IsSmall && isProjectListVisible)
                     {
                         <div class="button-div">
 
-                                <button class="new-proyect-pc" @onclick="() =>showNewProject()">New Project</button>
+                                <button class="new-proyect-pc highlight" @onclick="() =>showNewProject()">New Project</button>
                                 
 
                         </div>
                     }
+
+                   
                 </div>
 
                 @if (isProjectListVisible)
                 {
                     <div class="projects-list">
-                        <ProjectsListGeneral User=@user>
+                            <ProjectsListGeneral User=@user darkMode=@DarkMode.isDarkMode>
                         </ProjectsListGeneral>
                     </div>
 
@@ -58,7 +80,7 @@
                         {
                             <div class="button-div">
 
-                                <button class="new-proyect-mobile" @onclick="() =>showNewProject()">New Project + </button>
+                                <button class="new-proyect-mobile highlight" @onclick="() =>showNewProject()">New Project + </button>
 
                             </div>
                         }
@@ -67,22 +89,22 @@
                 @if (isNewProjectVisible)
                 {
                         <div class= "form-div" >
-                        <form class="form-style">
+                            <form class="form-style shadow-always">
                             <div class="form-group-div">
                             <div class="form-group">
-                                        <label for="project-name"> <span class="back-button" @onclick="() => showProjectList()"> &lt- </span><br> Name of the Project:</label><br>
-                                <input type="text" class="form-control" id="project-name" @bind-value="@ProjectName"><br>
+                                        <label for="project-name"> <span class="back-button hoverable" @onclick="() => showProjectList()"> &lt- </span><br> Name of the Project:</label><br>
+                                <input type="text" class="form-control font-normal" id="project-name" @bind-value="@ProjectName"><br>
                             </div>
                             <div class="form-group">
                                 <label for="project-desc">Description:</label><br>
-                                <textarea class="form-control desc" id="project-desc" @oninput="@HandleDescriptionOnChange"> @ProjectDescription </textarea><br>
+                                        <textarea class="form-control desc font-normal" id="project-desc" @oninput="@HandleDescriptionOnChange"> @ProjectDescription </textarea><br>
                             </div>
                             <div class="form-group">
                                 <label for="project-perc">Percentage:</label>
-                                <input type="number" class="form-control" id="project-perc" name="project-perc" min="0" max="100" required @bind-value="@ProjectPercentage"><br>
+                                        <input type="number" class="form-control font-normal" id="project-perc" name="project-perc" min="0" max="100" required @bind-value="@ProjectPercentage"><br>
                             </div></div>
                             <div class="form-group-button">
-                                <input type="submit" class="btn new-proyect-pc" value="Create" @onclick="() =>createProject()">
+                                <input type="submit" class="btn-create highlight" value="Create" @onclick="() =>createProject()">
                                 
                             </div>
                         </form>
@@ -205,6 +227,12 @@ else
     {
 
         //AuthenticationManager.SignOut();
+    }
+
+    void ToggleDarkMode()
+    {
+        DarkMode.isDarkMode = !DarkMode.isDarkMode;
+    
     }
 
 

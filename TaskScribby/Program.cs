@@ -22,8 +22,8 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
-builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<ProjectService>();
+builder.Services.AddTransient<DarkMode>();
 builder.Services.AddMediaQueryService();
 
 var app = builder.Build();

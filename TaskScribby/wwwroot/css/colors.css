@@ -1,0 +1,19 @@
+﻿
+
+
+.hoverable:hover {
+    color: #E83671;
+}
+
+.highlight {
+    color: #FFFFFF;
+    background-color: #E83671;
+}
+
+    .highlight:hover {
+        background-color: #BA2959;
+    }
+
+input, textarea, input:focus, textarea:focus {
+    background-color: transparent;
+}

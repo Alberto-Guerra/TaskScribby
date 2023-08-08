@@ -27,7 +27,9 @@
 }
 
 * {
-    
+    color: #1E1E1E;
+    background-color: #F9F8EB;
+    font-family: Inter;
 }
 
 header {
@@ -46,24 +48,31 @@ header {
 
 .button-logout {
     text-decoration: none;
-    background-color: transparent;
+    color: #1E1E1E;
     font-weight: bold;
     border: none;
+}
+.button-logout:hover {
+color: #E83671;
 }
 
 
 
 a {
     text-decoration: none;
+    color: #1E1E1E;
     font-weight: bold;
 }
 
+a:hover {
+    color: #E83671;
+}
 
 .page {
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     height: 100vh;
-    font-family: Inter;
+
 }
 
 .wrapper {
@@ -114,6 +123,8 @@ span {
 }
 
     .button-div > button {
+        background-color: #E83671;
+        color: #FFFFFF;
         border: none;
         border-radius: 50px;
         font-size: 14px;
@@ -134,6 +145,9 @@ span {
         text-align: center;
     }
 
+    .button-div > button:hover {
+        box-shadow: 2px 2px 10px #E83671;
+    }
 
 /* Form */
 
@@ -145,11 +159,15 @@ span {
     max-width: 660px;
     width: 100%;
     padding: 0 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
     gap: 20px;
 }
 
 
+input:focus, textarea:focus  {
+    background-color: transparent;
+}
 
 textearea {
     resize: none;
@@ -177,24 +195,18 @@ textearea {
 }
 
 .btn {
+    background-color: #E83671;
+    color: #FFFFFF;
+    border: none;
     border-radius: 50px;
     font-size: 15px;
     max-width: 40%;
     margin-bottom: 20px;
 }
 
-.btn-create {
-    border-radius: 50px;
-    font-size: 15px;
-    max-width: 40%;
-    border: none;
-    width: 100px;
-    height: 37px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    background-color: #E83671;
-}   
-
+    .btn:hover {
+        box-shadow: 2px 2px 10px #E83671;
+    }
 
 .oi-x {
     cursor: pointer;
@@ -202,12 +214,15 @@ textearea {
 
 .back-button {
     font-weight: 600;
+    color: #E83671;
     font-size: 20px;
 }
 
-input, textarea, input:focus, textarea:focus {
-    background-color: transparent;
-}
+    .back-button:hover {
+        color: #BA2959;
+    }
+
+
 
 
 /* Media query for small screens */
@@ -225,7 +240,7 @@ input, textarea, input:focus, textarea:focus {
         }
     header {
         justify-content: space-around;
-       
+        border-bottom: 1px solid #1E1E1E;
 
     }
 
