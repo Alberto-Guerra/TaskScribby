@@ -45,5 +45,11 @@ namespace TaskScribby.Areas.Identity.Services
             _context.SaveChanges();
         }
 
+        public void UpdateProject( Project project, ApplicationUser user)
+        {
+            user.UpdateProject(project);
+            _context.SaveChanges();
+        }
+
     }
 }

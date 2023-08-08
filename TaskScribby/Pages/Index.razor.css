@@ -71,21 +71,22 @@ a:hover {
 .page {
     display: flex;
     justify-content: center; 
-    height: 100%;
-    min-height: 100vh
+    height: 100vh;
+
 }
 
 .wrapper {
+    display: flex;
+    flex-direction: column;
     max-width: 1200px;
-
     width: 100%;
-    height: 100%
+    height: 100%;
 }
 
 span {
     cursor: pointer;
 }
-    
+
 
 .content {
     display: flex;
@@ -100,12 +101,18 @@ span {
         justify-content: flex-start;
         gap: 20px;
         width: 15%;
-        height: 100%;
     }
 
     .content .projects-list {
         width: 100%;
         height: 100%;
+    }
+
+    .content .form-div {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
     }
 
 .button-div{
@@ -120,7 +127,7 @@ span {
         color: #FFFFFF;
         border: none;
         border-radius: 50px;
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .new-proyect-pc {
@@ -135,6 +142,7 @@ span {
         height: 40px;
         font-weight: 600;
         margin-bottom: 10px;
+        text-align: center;
     }
 
     .button-div > button:hover {
@@ -142,12 +150,41 @@ span {
     }
 
 /* Form */
+
+
 .form-style {
-    max-width: 360px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    max-width: 660px;
+    width: 100%;
+    padding: 0 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+
+input:focus, textarea:focus  {
+    background-color: transparent;
+}
+
+textearea {
+    resize: none;
 }
 
 .form-group {
     margin: 10px 0;
+    font-weight: 600;
+}
+
+.form-group-button{
+    display: flex;
+    justify-content: center;
+}
+
+.desc {
+    min-height: 200px;
 }
 
 .form-control {
@@ -163,6 +200,8 @@ span {
     border: none;
     border-radius: 50px;
     font-size: 15px;
+    max-width: 40%;
+    margin-bottom: 20px;
 }
 
     .btn:hover {
@@ -172,6 +211,16 @@ span {
 .oi-x {
     cursor: pointer;
 }
+
+.back-button {
+    font-weight: 600;
+    color: #E83671;
+    font-size: 20px;
+}
+
+    .back-button:hover {
+        color: #BA2959;
+    }
 
 
 
@@ -191,10 +240,14 @@ span {
         }
     header {
         justify-content: space-around;
+        border-bottom: 1px solid #1E1E1E;
+
     }
 
     .form-style{
-        margin-top: 20px;
+        margin-top: 5px;
+        width: 100%;
+        box-shadow:none;
     }
 
 }
@@ -216,4 +269,6 @@ span {
     .wrapper {
         padding: 0px 20px;
     }
+
+
 }

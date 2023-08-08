@@ -19,5 +19,19 @@ namespace TaskScribby.Areas.Identity.Data
             Projects.Remove(project);
         }
 
+        public void UpdateProject(Project project)
+        {
+            foreach(var p in Projects)
+            {
+                if(p.Id == project.Id)
+                {
+                    p.ProjectPercentage = project.ProjectPercentage;
+                    p.ProjectName = project.ProjectName;
+                    p.ProjectDescription = project.ProjectDescription;
+                    
+                }
+            }
+        }
+
     }
 }

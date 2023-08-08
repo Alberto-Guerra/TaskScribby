@@ -22,7 +22,7 @@
     }
 
     <div class="general-container">
-        @if (listProjectsVisible)
+        @if (listProjectsVisible && !editMode)
         {
             <div class="project-list-container">
                 @foreach (var project in User.Projects)
@@ -33,39 +33,75 @@
                         @{
                             var description = @project.ProjectDescription;
                         }
-
                         @if (!string.IsNullOrEmpty(description) && description.Length > 100)
                         {
-                            <p>description.Substring(0, 100)</p>
+                            <p>@description.Substring(0, 100)...</p>
                         }
                         else if (!string.IsNullOrEmpty(description))
                         {
                             <p>@description</p>
                         }
+                        </div>
 
-                    </div>
+                   
                 }
             </div>
         }
 
-        @if (selectedProjectVisible)
+        @if (selectedProjectVisible && !editMode)
         {
-            if (IsSmall)
-            {
-                //Back button All projects and search bar
-            }
+           
             if (selectedProject != null)
             {
-                <div class="concrete-project-container" >
-                    
-                        <h3><span @onclick="() => handler.handleBack(this)" class="oi oi-x" aria-hidden="true"></span> @selectedProject.ProjectName - @selectedProject.ProjectPercentage % <span @onclick="() => DeleteProject(selectedProject)" class="oi oi-trash" aria-hidden="true"></span></h3>
-                                         
+                <div class="concrete-project-container">
+                <div class="project-content">
+                <div class="project-title"> 
+                <h3>
+                    <span @onclick="() => handler.handleBack(this)" class="oi oi-x" aria-hidden="true"></span>
+                        @selectedProject.ProjectName - @selectedProject.ProjectPercentage% 
+                    <span @onclick="() => DeleteProject(selectedProject)" class="oi oi-trash" aria-hidden="true"></span>
+                </h3>
+                    </div>
+                <div class="project-description">
+
                     <p>@selectedProject.ProjectDescription</p>
-                </div>
+                 </div>
+                 </div>
+                    <div class="project-editmode-button">
+                        <button @onclick="() => ToggleEditMode()"> <span class="oi oi-brush" aria-hidden="true"></span>  Edit Mode </button>
+                 </div>
+            </div>
             }
 
         }
-      
+
+        @if (editMode && selectedProject != null)
+        {
+            <div class="form-div">
+                <form class="form-style">
+                    <div class="form-group-div">
+                        <div class="form-group">
+                            <span class="back-button" @onclick="() =>ToggleEditMode()"> &lt- </span> <br>
+                            <label for="project-name"> Name of the Project:</label><br>
+                            <input type="text" class="form-control" id="project-name" @bind-value="@selectedProject.ProjectName"><br>
+                        </div>
+                        <div class="form-group">
+                            <label for="project-desc">Description:</label><br>
+                            <textarea class="form-control desc" id="project-desc" @oninput="@HandleDescriptionOnChange"> @selectedProject.ProjectDescription </textarea><br>
+                        </div>
+                        <div class="form-group">
+                            <label for="project-perc">Percentage:</label>
+                            <input type="number" class="form-control" id="project-perc" name="project-perc" min="0" max="100" required @bind-value="@selectedProject.ProjectPercentage"><br>
+                        </div>
+                    </div>
+                    <div class="form-group-button">
+                        <input type="submit" class="btn new-proyect-pc" value="Update" @onclick="() => UpdateProject()">
+
+                    </div>
+                </form>
+            </div>
+        }
+
     </div>
 
 }
@@ -87,17 +123,9 @@
 
     bool IsSmall;
 
-    string ProjectName { get; set; } = "";
-
-    public void AddNewProject()
+    public void UpdateProject(Project project)
     {
 
-        if (User != null)
-        {
-            var newProject = new Project(ProjectName, "Description", 0);
-            ProjectService.AddProject(newProject, User);
-
-        }
     }
 
     public void DeleteProject(Project project)
@@ -153,5 +181,32 @@
             plg.selectedProjectVisible = false;
         }
     }
+
+    bool editMode = false;
+
+    public void ToggleEditMode()
+    {
+        editMode = !editMode;
+    }
+
+    private void HandleDescriptionOnChange(ChangeEventArgs e)
+    {
+        if (e.Value == null)
+        {
+            return;
+        }
+        selectedProject.ProjectDescription = e.Value.ToString();
+
+
+    }
+
+    public void UpdateProject()
+    {
+        if( User != null && selectedProject != null)
+        {
+            ProjectService.UpdateProject(selectedProject, User);
+        }
+    }
+
 
 }
